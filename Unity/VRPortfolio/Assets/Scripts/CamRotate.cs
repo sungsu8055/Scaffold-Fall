@@ -28,6 +28,9 @@ public class CamRotate : MonoBehaviour
         float x = Input.GetAxis("Mouse X");
         float y = Input.GetAxis("Mouse Y");
 
+        // float x = ARAVRInput.GetAxis("Horizontal", ARAVRInput.Controller.RTouch);
+        // float y = ARAVRInput.GetAxis("Vertical", ARAVRInput.Controller.RTouch);
+
         // 2. 방향이 필요하다.
         // 이동 공식에 대입하여 각 속성별로 회전 값을 누적 시킨다.
         angle.x += x * sensitivity * Time.deltaTime;
