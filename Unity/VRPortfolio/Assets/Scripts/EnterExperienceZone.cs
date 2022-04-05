@@ -8,27 +8,23 @@ public class EnterExperienceZone : MonoBehaviour
     public Transform zoneEntryUI;
     public GameObject player;
     public Transform originPos;
+    public Transform popupPos;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
+    public GameObject nextStep;
 
     public void ZoneEntry()
     {
         // 체험 소개 및 진행 유무 선택 UI 출력
         zoneEntryUI.gameObject.SetActive(true);
 
+        // 체험 존 소개 UI 위치를 Popup position 으로 재설정
+        zoneEntryUI.SetPositionAndRotation(popupPos.position, popupPos.rotation);
+
         // UI 내용 확인 및 집중을 위해 이동 기능 정지(초기 위치 원복을 위해 함수 호출 시 CC가 활성화 상태이면 작동하지 않음)
         player.GetComponent<CharacterController>().enabled = false;
     }
 
-    // 아래 Y/N 버튼 선택 기능은 추후 오큘러스 컨트롤러 터치 시 Other.gameobject.transform 값을 받아와 UI 활성 비활성 조정
+    // 아래 Y/N 버튼 선택 기능은 추후 오큘러스 컨트롤러 터치 시 해당 버튼에서 충돌 체크 후 아래 함수 호출
     // 위와 같이 각 구역별 UI를 따로 식별해 작동 시키기 위함
     public void ExitZone()
     {
@@ -47,8 +43,10 @@ public class EnterExperienceZone : MonoBehaviour
         // Button - OnClick 옵션에서 포인터한 오브젝트를 파라미터로 받아 위치 수정 시 이용
         player.transform.SetPositionAndRotation(startPos.position, startPos.rotation);
         // Character Controller 활성
-        player.GetComponent<CharacterController>().enabled = true;
+        // player.GetComponent<CharacterController>().enabled = true;
         // 체험 소개 및 진행 유무 UI 비활성
         zoneEntryUI.gameObject.SetActive(false);
+
+        nextStep.SetActive(true);
     }
 }

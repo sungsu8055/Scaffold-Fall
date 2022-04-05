@@ -37,8 +37,6 @@ public class PlayerCtrl : MonoBehaviour
         Gravity();
 
         cc.Move(moveDir * speed * Time.deltaTime);
-
-        // Debug.Log(p_State);
     }
 
     void MoveKeyInput()
@@ -65,6 +63,7 @@ public class PlayerCtrl : MonoBehaviour
         // ExperienceZone 태그 감지 시 함수 호출
         if (other.gameObject.CompareTag("ExperienceZone") && p_State == PlayerState.Idle)
         {
+            // 충돌한 체험 존의 UI를 zoneEntryUI로 설정
             zoneCtrl.zoneEntryUI = other.gameObject.transform.GetChild(0);
 
             // 충돌 감지 후 ZoneEntryController의 함수 호출
