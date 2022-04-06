@@ -5,17 +5,21 @@ using DG.Tweening;
 
 public class ClimbLadder : MonoBehaviour
 {
+    public Step3_RemoveCast RC;
+
     public Transform player;
     public Transform highPoint;
     public Transform endPoint;
+
+    public GameObject approachGuide;
+
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            // other.transform.DOPath(waypoint, 2.0f, PathType.Linear, PathMode.Full3D, 10, null);            
-            // other.transform.DORotateQuaternion(endPoint.rotation, 1.0f);
-            
+            approachGuide.SetActive(false);
+
             // 애니메이션 시작 전 위치 재정렬을 위해 CC 비활성
             player.GetComponent<CharacterController>().enabled = false;
 
@@ -43,10 +47,9 @@ public class ClimbLadder : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
 
         player.DORotateQuaternion(endPoint.rotation, 1.0f);
-    }
 
-    void NextStep()
-    {
-        
+        yield return new WaitForSeconds(1.0f);
+
+        RC.StartInstruction();
     }
 }

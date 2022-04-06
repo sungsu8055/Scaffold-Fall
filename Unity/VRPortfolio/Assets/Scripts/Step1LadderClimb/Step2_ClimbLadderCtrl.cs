@@ -7,6 +7,10 @@ public class Step2_ClimbLadderCtrl : MonoBehaviour
     public GameObject climbInstruction;
     public Transform popupPos;
 
+    public GameObject player;
+
+    public GameObject approachGuide;
+
     void Start()
     {
         StartCoroutine(StartClimbLadder());
@@ -19,5 +23,22 @@ public class Step2_ClimbLadderCtrl : MonoBehaviour
         climbInstruction.SetActive(true);
 
         climbInstruction.transform.SetPositionAndRotation(popupPos.position, popupPos.rotation);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("GameController"))
+        {
+            ApproachLadder();
+        }
+    }
+
+    public void ApproachLadder()
+    {
+        player.GetComponent<CharacterController>().enabled = true;
+
+        climbInstruction.gameObject.SetActive(false);
+
+        approachGuide.SetActive(true);
     }
 }
