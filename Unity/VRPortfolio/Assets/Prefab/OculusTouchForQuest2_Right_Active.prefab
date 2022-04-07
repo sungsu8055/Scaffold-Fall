@@ -433,8 +433,8 @@ GameObject:
   - component: {fileID: 6080692835900054754}
   - component: {fileID: 5067266119287372989}
   m_Layer: 0
-  m_Name: LightHandCollider
-  m_TagString: GameController
+  m_Name: RightHandCollider
+  m_TagString: ControllerRight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

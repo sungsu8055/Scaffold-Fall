@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5471838245721125085}
   m_Layer: 0
   m_Name: LeftHandCollider
-  m_TagString: GameController
+  m_TagString: ControllerLeft
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

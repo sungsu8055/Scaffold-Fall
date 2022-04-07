@@ -27,7 +27,8 @@ public class Step2_ClimbLadderCtrl : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("GameController"))
+        if (other.CompareTag("ControllerLeft") ||
+            other.CompareTag("ControllerRight"))
         {
             ApproachLadder();
         }

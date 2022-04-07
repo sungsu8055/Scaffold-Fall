@@ -8,6 +8,8 @@ TagManager:
   - StartPosition
   - OptionY
   - OptionN
+  - ControllerLeft
+  - ControllerRight
   layers:
   - Default
   - TransparentFX

@@ -1,15 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class PlayerCtrl : MonoBehaviour
 {
     public CharacterController cc;
     public EnterExperienceZone zoneCtrl;
+    public XRController oculursController;
 
     [Header("Control")]
-    public float horizontalMove;
-    public float verticalMove;
+    float horizontalMove;
+    float verticalMove;
     public float gravity = -20;
     public float speed = 10;
     float yValocity = 0;
@@ -41,11 +44,19 @@ public class PlayerCtrl : MonoBehaviour
 
     void MoveKeyInput()
     {
-        // PC or VR 이동 키 입력값 받아옴
+        // PC이동 키 입력값 받아옴
+        /*/
         horizontalMove = ARAVRInput.GetAxis("Horizontal");
         verticalMove = ARAVRInput.GetAxis("Vertical");
 
-        moveDir = new Vector3(horizontalMove, 0, verticalMove);
+        Debug.Log("Hor" + horizontalMove);
+        Debug.Log("Ver" + verticalMove);
+        //*/
+
+        // XR.Interaction.Toolkit의 컨트롤러 입력 값 함수 사용
+        oculursController.inputDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 MoveInput);
+
+        moveDir = new Vector3(MoveInput.x, 0, MoveInput.y);
 
         // 카메라 움직임에 따라 Player Obj 방향 전환, 움직임 방향도 변경됨
         moveDir = Camera.main.transform.TransformDirection(moveDir);

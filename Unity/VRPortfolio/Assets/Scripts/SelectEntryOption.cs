@@ -17,11 +17,15 @@ public class SelectEntryOption : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // 옵션 버튼 단에서 충돌 체크 후 태그를 통해 옵션 종류 및 컨트롤러 유무를 체크
-        if (gameObject.CompareTag("OptionY") && other.CompareTag("GameController"))
+        if (gameObject.CompareTag("OptionY") && 
+            (other.CompareTag("ControllerLeft") || 
+            other.CompareTag("ControllerRight")))
         {
             enterOptionCtrl.StartExperience(startPos);
         }
-        else if (gameObject.CompareTag("OptionN") && other.CompareTag("GameController"))
+        else if (gameObject.CompareTag("OptionN") && 
+            (other.CompareTag("ControllerLeft") ||
+            other.CompareTag("ControllerRight")))
         {
             enterOptionCtrl.ExitZone();
         }

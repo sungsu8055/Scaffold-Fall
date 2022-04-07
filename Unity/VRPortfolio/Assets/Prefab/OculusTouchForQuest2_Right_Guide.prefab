@@ -13,13 +13,13 @@ GameObject:
   - component: {fileID: 7860449071415661339}
   - component: {fileID: 6280135720349489529}
   - component: {fileID: 4764111351000500763}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: OculusTouchForQuest2_Right_Guide
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7810854962471609792
 Transform:
   m_ObjectHideFlags: 0
@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb280d843767074e8097249fa0351ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RC: {fileID: 0}
 --- !u!65 &6280135720349489529
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -106,7 +107,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7810854962471609794}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: right_oculus_controller_world
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7810854962471609796}
   - component: {fileID: 7810854962482689264}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: r_rainier_mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -232,7 +233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7810854962471609808}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: b_button_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +263,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7810854962471609810}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: b_button_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +293,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7810854962471609812}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: b_thumbstick
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +323,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7810854962471609814}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: b_button_oculus
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,7 +353,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7810854962471609816}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: b_trigger_grip
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -382,7 +383,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7810854962471609818}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: b_trigger_front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -412,7 +413,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7810854962471609820}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: right_laser_begin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -443,7 +444,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7810854962471609822}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: pasted__laser_end_pointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

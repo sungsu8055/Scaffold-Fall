@@ -1,20 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Step3_RemoveCast : MonoBehaviour
 {
+    public ControllerInputManager CIM;
+
     public GameObject instructionUI;
     public Transform popupPos;
 
     public GameObject ctrlGuideLeft;
     public GameObject ctrlGuideRight;
 
-    public Transform controllerLeft;
-    public Transform controllerRight;
+    public Transform grabGuideIndicatorL;
+    public Transform grabGuideIndicatorR;
+    public Material grab;
+    public Material ungrab;
 
-    bool isGrabLeft = false;
-    bool isGrabRight = false;
+    public bool isGrabLeft = false;
+    public bool isGrabRight = false;
 
     void Start()
     {
@@ -35,7 +40,8 @@ public class Step3_RemoveCast : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("GameController"))
+        if (other.CompareTag("ControllerLeft") ||
+            other.CompareTag("ControllerRight"))
         {
             StartRemove();
         }        
@@ -48,27 +54,54 @@ public class Step3_RemoveCast : MonoBehaviour
         ctrlGuideLeft.SetActive(true);
         ctrlGuideRight.SetActive(true);
 
+        grabGuideIndicatorL.gameObject.SetActive(true);
+        grabGuideIndicatorR.gameObject.SetActive(true);
     }
 
-    public void GrabCastLeft()
+    public void GrabCast(Collider controller)
     {
-        controllerLeft.SetPositionAndRotation(ctrlGuideLeft.transform.position, ctrlGuideLeft.transform.rotation);
-        controllerLeft.SetParent(ctrlGuideLeft.transform);
+        if(controller.CompareTag("ControllerLeft") && CIM.isGetGripL)
+        {
+            ctrlGuideLeft.transform.GetChild(0).gameObject.SetActive(false);
 
-        ctrlGuideLeft.transform.GetChild(0).gameObject.SetActive(false);
+            grabGuideIndicatorL.gameObject.GetComponent<Image>().material = ungrab;
 
-        isGrabLeft = true;
+            isGrabLeft = true;
+        }
+        //*/
+        else if (controller.gameObject.name != "LeftHandCollider" && !CIM.isGetGripL)
+        {
+            ctrlGuideLeft.transform.GetChild(0).gameObject.SetActive(true);
+
+            grabGuideIndicatorL.gameObject.GetComponent<Image>().material = grab;
+
+            isGrabLeft = false;
+        }
+        //*/
+
+        if (controller.CompareTag("ControllerRight") && CIM.isGetGripR)
+        {
+            ctrlGuideRight.transform.GetChild(0).gameObject.SetActive(false);
+
+            grabGuideIndicatorR.gameObject.GetComponent<Image>().material = ungrab;
+
+
+            isGrabRight = true;
+        }
+        //*/
+        else if (controller.gameObject.name != "RightHandCollider" && !CIM.isGetGripR)
+        {
+            ctrlGuideRight.transform.GetChild(0).gameObject.SetActive(true);
+
+            grabGuideIndicatorR.gameObject.GetComponent<Image>().material = grab;
+
+            isGrabRight = false;
+        }
+        //*/
     }
 
-    public void GrabCastRight()
+    public void RemoveCast()
     {
-        controllerRight.SetPositionAndRotation(ctrlGuideRight.transform.position, ctrlGuideRight.transform.rotation);
-        controllerRight.SetParent(ctrlGuideRight.transform);
 
-        ctrlGuideRight.transform.GetChild(0).gameObject.SetActive(false);
-
-        isGrabRight = true;
     }
-
-    
 }
