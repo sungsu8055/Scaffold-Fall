@@ -22,7 +22,8 @@ public class PlayerCtrl : MonoBehaviour
     public enum PlayerState
     {
         Idle,
-        EnterZone
+        EnterZone,
+        WorkingProgress
     }
 
     public PlayerState p_State;
