@@ -64,7 +64,7 @@ public class Step3_RemoveCast : MonoBehaviour
 
             grabGuideIndicatorL.gameObject.GetComponent<Image>().material = grab;
 
-            Debug.Log(controller.gameObject.name);            
+            Debug.Log(controller.gameObject.name);
 
             player.p_State = PlayerCtrl.PlayerState.WorkingProgress;
 
