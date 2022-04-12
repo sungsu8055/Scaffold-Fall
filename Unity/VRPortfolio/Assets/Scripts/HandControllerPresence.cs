@@ -11,7 +11,7 @@ public class HandControllerPresence : MonoBehaviour
     public GameObject handPrefab;
     
     InputDevice targetDevice;
-    GameObject spawnCtrl;
+    public GameObject spawnCtrl;
     GameObject spawnHandModel;
     Animator handAnim;
 
