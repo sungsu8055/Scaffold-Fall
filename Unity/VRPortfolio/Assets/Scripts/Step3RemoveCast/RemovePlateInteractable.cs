@@ -33,11 +33,17 @@ public class RemovePlateInteractable : XRGrabInteractable
         }
     }
 
-    protected override void OnSelectEntered(XRBaseInteractor interactor)
+    // 파라미터로 주어진 interactor가 interactable을 선택할 수 있는지 여부를 결정하는 메소드
+    public override bool IsSelectableBy(XRBaseInteractor interactor)
     {
-        base.OnSelectEntered(interactor);
+        // 해당 물체를 선택한 selectingInteractor가 인식되고,
+        // 파라미터로 들어온 interactor가 먼저 인식된 interactor와 같지 않을 경우 isAlreadyGrabbed 값을 true로 반환하여,
+        // 이미 잡는 동작 중인 상태를 알림
+        bool isAlreadyGrabbed = selectingInteractor && !interactor.Equals(selectingInteractor);
 
-        CPDL.PullingLeft();
-        CPDR.PullingRight();
+        // && 연산자 사용 해당 메소드에 bool 값을 반환
+        // base.IsSelectableBy(interactor) true 값 반환됨 && isAlreadyGrabbed가 false일 시 true가 반환되어 오브젝트 선택 가능
+        // true일 시 false가 반환되어 오브젝트 선택불가
+        return base.IsSelectableBy(interactor) && !isAlreadyGrabbed;
     }
 }

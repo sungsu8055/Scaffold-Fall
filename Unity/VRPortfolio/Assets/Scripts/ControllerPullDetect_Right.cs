@@ -26,7 +26,7 @@ public class ControllerPullDetect_Right : MonoBehaviour
             checkDelay = 0f;
         }
 
-       // StartCoroutine(PullingRight());
+        StartCoroutine(PullingRight());
 
     }
 
