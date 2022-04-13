@@ -33,6 +33,7 @@ public class RemovePlateInteractable : XRGrabInteractable
         }
     }
 
+    /*/
     // 파라미터로 주어진 interactor가 interactable을 선택할 수 있는지 여부를 결정하는 메소드
     public override bool IsSelectableBy(XRBaseInteractor interactor)
     {
@@ -45,5 +46,13 @@ public class RemovePlateInteractable : XRGrabInteractable
         // base.IsSelectableBy(interactor) true 값 반환됨 && isAlreadyGrabbed가 false일 시 true가 반환되어 오브젝트 선택 가능
         // true일 시 false가 반환되어 오브젝트 선택불가
         return base.IsSelectableBy(interactor) && !isAlreadyGrabbed;
+    }
+    //*/
+
+    public override bool IsSelectableBy(IXRSelectInteractor interactor)
+    {
+        bool isAlreadyGrab = interactorsSelecting[0] != null && !interactor.Equals(interactorsSelecting[0]);
+
+        return base.IsSelectableBy(interactor) && !isAlreadyGrab;
     }
 }
