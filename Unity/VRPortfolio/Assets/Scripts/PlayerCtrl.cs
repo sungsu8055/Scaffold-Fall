@@ -72,6 +72,8 @@ public class PlayerCtrl : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("체험존 입장" + other.name);
+
         // ExperienceZone 태그 감지 시 함수 호출
         if (other.gameObject.CompareTag("ExperienceZone") && p_State == PlayerState.Idle)
         {

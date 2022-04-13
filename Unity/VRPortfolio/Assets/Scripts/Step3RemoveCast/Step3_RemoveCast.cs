@@ -80,7 +80,7 @@ public class Step3_RemoveCast : MonoBehaviour
 
             //controller.transform.GetChild(0).gameObject.SetActive(true);
 
-            player.p_State = PlayerCtrl.PlayerState.EnterZone;
+            // player.p_State = PlayerCtrl.PlayerState.EnterZone;
 
             isGrabLeft = false;
         }

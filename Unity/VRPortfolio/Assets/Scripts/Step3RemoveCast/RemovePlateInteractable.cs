@@ -5,6 +5,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class RemovePlateInteractable : XRGrabInteractable
 {
+    public List<XRSimpleInteractable> secondGrabPoint = new List<XRSimpleInteractable>();
+
     public ControllerPullDetect_Left CPDL;
     public ControllerPullDetect_Right CPDR;
 
@@ -12,7 +14,31 @@ public class RemovePlateInteractable : XRGrabInteractable
 
     void Start()
     {
-        
+        foreach(var item in secondGrabPoint)
+        {
+            item.onSelectEnter.AddListener(OnSecondGrab);
+            item.onSelectExit.AddListener(OnSecondGrabRelease);
+        }
+    }
+
+    public void OnSecondGrab(XRBaseInteractor interactor)
+    {
+        Debug.Log("두번째 그랩 작동");
+    }
+    public void OnSecondGrabRelease(XRBaseInteractor interactor)
+    {
+        Debug.Log("두번째 그랩 풀림");
+    }
+
+    protected override void OnSelectEntered(XRBaseInteractor interactor)
+    {
+        Debug.Log("첫번째 그랩 작동");
+        base.OnSelectEntered(interactor);
+    }
+    protected override void OnSelectExited(XRBaseInteractor interactor)
+    {
+        Debug.Log("첫번째 그랩 풀림");
+        base.OnSelectExited(interactor);
     }
 
     void Update()
@@ -33,7 +59,6 @@ public class RemovePlateInteractable : XRGrabInteractable
         }
     }
 
-    /*/
     // 파라미터로 주어진 interactor가 interactable을 선택할 수 있는지 여부를 결정하는 메소드
     public override bool IsSelectableBy(XRBaseInteractor interactor)
     {
@@ -46,13 +71,5 @@ public class RemovePlateInteractable : XRGrabInteractable
         // base.IsSelectableBy(interactor) true 값 반환됨 && isAlreadyGrabbed가 false일 시 true가 반환되어 오브젝트 선택 가능
         // true일 시 false가 반환되어 오브젝트 선택불가
         return base.IsSelectableBy(interactor) && !isAlreadyGrabbed;
-    }
-    //*/
-
-    public override bool IsSelectableBy(IXRSelectInteractor interactor)
-    {
-        bool isAlreadyGrab = interactorsSelecting[0] != null && !interactor.Equals(interactorsSelecting[0]);
-
-        return base.IsSelectableBy(interactor) && !isAlreadyGrab;
     }
 }
