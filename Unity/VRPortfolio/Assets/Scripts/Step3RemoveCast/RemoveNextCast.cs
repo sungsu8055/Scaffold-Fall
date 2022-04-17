@@ -10,6 +10,7 @@ public class RemoveNextCast : MonoBehaviour
     public RemovePlateInteractable RPI;
     public Transform player;
     public Transform nextCastPos;
+    public DetectSafetyGear DSG;
 
     public bool nextCastPosComplete = false;
 
@@ -26,8 +27,17 @@ public class RemoveNextCast : MonoBehaviour
             RPI.restoreTrackOption = true;
             nextCastPosComplete = true;
 
-            // 안전 장구 미착용시 위험 상태로 전환
-            player.GetComponent<PlayerCtrl>().p_State = PlayerCtrl.PlayerState.Danger;
-        }
+            if (DSG.detectSafetyHat == false && DSG.detectSafetyBelt == false)
+            {
+                // 안전 장구 미착용시 위험 상태로 전환
+                player.GetComponent<PlayerCtrl>().p_State = PlayerCtrl.PlayerState.Danger;
+
+            }
+            else if (DSG.detectSafetyHat == true && DSG.detectSafetyBelt == true)
+            {
+                // 안전 장구 착용시 안전 상태로 전환
+                player.GetComponent<PlayerCtrl>().p_State = PlayerCtrl.PlayerState.Safety;            
+            }
+        }      
     }
 }

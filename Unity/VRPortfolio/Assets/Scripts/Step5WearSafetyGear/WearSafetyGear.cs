@@ -13,6 +13,8 @@ public class WearSafetyGear : MonoBehaviour
 
     public GameObject approachLadderGuide;
 
+    private bool wearingSafetyGearComplete = false;
+
     void Start()
     {
         StartCoroutine(StartSafetyProcedures());
@@ -20,11 +22,12 @@ public class WearSafetyGear : MonoBehaviour
 
     void Update()
     {
-        if(DSG.detectSafetyHat == true && DSG.detectSafetyBelt == true)
+        if(DSG.detectSafetyHat == true && DSG.detectSafetyBelt == true && !wearingSafetyGearComplete)
         {
             Debug.Log("안전 장구 착용 완료");
             approachLadderGuide.SetActive(true);
             player.enabled = true;
+            wearingSafetyGearComplete = true;
         }
     }
 
