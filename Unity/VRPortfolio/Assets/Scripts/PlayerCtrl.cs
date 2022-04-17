@@ -23,7 +23,8 @@ public class PlayerCtrl : MonoBehaviour
     {
         Idle,
         EnterZone,
-        WorkingProgress
+        Danger,
+        Safety
     }
 
     public PlayerState p_State;
@@ -45,15 +46,6 @@ public class PlayerCtrl : MonoBehaviour
 
     void MoveKeyInput()
     {
-        // PC이동 키 입력값 받아옴
-        /*/
-        horizontalMove = ARAVRInput.GetAxis("Horizontal");
-        verticalMove = ARAVRInput.GetAxis("Vertical");
-
-        Debug.Log("Hor" + horizontalMove);
-        Debug.Log("Ver" + verticalMove);
-        //*/
-
         // XR.Interaction.Toolkit의 컨트롤러 입력 값 함수 사용
         oculursController.inputDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 MoveInput);
 
@@ -72,8 +64,6 @@ public class PlayerCtrl : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("체험존 입장" + other.name);
-
         // ExperienceZone 태그 감지 시 함수 호출
         if (other.gameObject.CompareTag("ExperienceZone") && p_State == PlayerState.Idle)
         {

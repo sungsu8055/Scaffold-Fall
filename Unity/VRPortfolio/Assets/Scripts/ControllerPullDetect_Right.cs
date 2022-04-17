@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class ControllerPullDetect_Right : MonoBehaviour
 {
+    public ControllerInputManager CIM;
     public float originZPos;
     public float prevZPos;
     public bool pullObjectRight = false;
 
-    float checkDelay;
+    private float checkDelay;
 
     void Start()
     {
         
     }
 
-    void Update()
+    void FixedUpdate()
     {
         checkDelay += Time.deltaTime;
         originZPos = this.transform.position.z;
@@ -26,13 +27,21 @@ public class ControllerPullDetect_Right : MonoBehaviour
             checkDelay = 0f;
         }
 
-        StartCoroutine(PullingRight());
+        //StartCoroutine(PullingRight());
 
+        if ((prevZPos - originZPos) >= 0.25f)
+        {
+            Debug.Log("¿À¸¥¼Õ ´ç±è");
+            pullObjectRight = true;
+        }
+
+        StartCoroutine(PullingRight());
     }
 
+    //*/
     public IEnumerator PullingRight()
     {
-        if ((prevZPos - originZPos) >= 0.3f)
+        if ((prevZPos - originZPos) >= 0.25f)
         {
             Debug.Log("¿À¸¥¼Õ ´ç±è");
             pullObjectRight = true;
@@ -42,4 +51,5 @@ public class ControllerPullDetect_Right : MonoBehaviour
 
         pullObjectRight = false;
     }
+    //*/
 }

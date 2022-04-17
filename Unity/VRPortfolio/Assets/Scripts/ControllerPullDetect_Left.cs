@@ -32,7 +32,7 @@ public class ControllerPullDetect_Left : MonoBehaviour
 
     public IEnumerator PullingLeft()
     {
-        if ((prevZPos - originZPos) >= 0.3f)
+        if ((prevZPos - originZPos) >= 0.25f)
         {
             Debug.Log("¿Þ¼Õ ´ç±è");
             pullObjectLeft = true;

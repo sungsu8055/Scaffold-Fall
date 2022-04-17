@@ -66,7 +66,7 @@ public class Step3_RemoveCast : MonoBehaviour
 
             Debug.Log(controller.gameObject.name);
 
-            player.p_State = PlayerCtrl.PlayerState.WorkingProgress;
+            // player.p_State = PlayerCtrl.PlayerState.WorkingProgress;
 
             isGrabLeft = true;  
         }
