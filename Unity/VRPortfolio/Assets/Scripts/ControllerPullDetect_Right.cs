@@ -27,18 +27,21 @@ public class ControllerPullDetect_Right : MonoBehaviour
             checkDelay = 0f;
         }
 
-        //StartCoroutine(PullingRight());
-
         if ((prevZPos - originZPos) >= 0.25f)
         {
-            Debug.Log("오른손 당김");
             pullObjectRight = true;
+            Debug.Log("오른손 당김");
+        }
+        else if((prevZPos - originZPos) < 0.25f)
+        {
+            pullObjectRight = false;
+            Debug.Log("오른손 대기");
         }
 
-        StartCoroutine(PullingRight());
+        //StartCoroutine(PullingRight());
     }
 
-    //*/
+    /*/
     public IEnumerator PullingRight()
     {
         if ((prevZPos - originZPos) >= 0.25f)

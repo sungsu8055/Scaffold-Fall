@@ -35,12 +35,13 @@ public class RemovePlateInteractable : XRGrabInteractable
 
     void FixedUpdate()
     {
-        if(CPDR.pullObjectRight)
+        if(CPDR.pullObjectRight && selectingInteractor)
         {
             Debug.Log("°ÅÇªÁý Á¦°Å");
             this.trackPosition = true;
             this.trackRotation = true;
             restoreTrackOption = false;
+            CPDR.pullObjectRight = false;
         }
         if(!CPDR.pullObjectRight && restoreTrackOption)
         {

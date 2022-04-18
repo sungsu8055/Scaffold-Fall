@@ -128,6 +128,9 @@ public class ScaffoldFall : MonoBehaviour
         cast2Safe.transform.gameObject.SetActive(true);
         Debug.Log("거푸집 위치 원복 진행");
 
+        // 트랙 복구 옵션 원복
+        RNC.RPI.restoreTrackOption = true;
+
         isFellDown = false;
 
         // 2차 제거 위치 이동 체크 원복
