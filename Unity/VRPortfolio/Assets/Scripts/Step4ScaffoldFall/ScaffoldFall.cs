@@ -120,7 +120,7 @@ public class ScaffoldFall : MonoBehaviour
     {
         // 플레이어 상태 변경
         player.p_State = PlayerCtrl.PlayerState.EnterZone;
-        // 거푸집 위치 원복
+        // 거푸집 삭제
         cast1.GetComponent<RemovePlateInteractable>().Destroy();
         cast2.GetComponent<RemovePlateInteractable>().Destroy();
 
