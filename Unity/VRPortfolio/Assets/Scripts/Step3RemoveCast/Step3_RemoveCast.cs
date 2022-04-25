@@ -48,19 +48,19 @@ public class Step3_RemoveCast : MonoBehaviour
     {
         instructionUI.SetActive(false);
 
-        ctrlGuideLeft.SetActive(true);
+        // ctrlGuideLeft.SetActive(true);
         ctrlGuideRight.SetActive(true);
 
-        grabGuideIndicatorL.gameObject.SetActive(true);
+        // grabGuideIndicatorL.gameObject.SetActive(true);
         grabGuideIndicatorR.gameObject.SetActive(true);
     }
 
-    public void GrabCast(Collider controller)
+    public void GrabCastL(Collider controller)
     {
         if(controller.CompareTag("ControllerLeft") && CIM.isGetGripL)
         {
-            //ctrlGuideLeft.transform.GetChild(0).gameObject.SetActive(false);
-            ctrlGuideLeft.transform.GetComponentInChildren<SkinnedMeshRenderer>().material.color = Color.white;
+            ctrlGuideLeft.transform.GetChild(0).gameObject.SetActive(false);
+            //ctrlGuideLeft.transform.GetComponentInChildren<SkinnedMeshRenderer>().material.color = Color.white;
 
             grabGuideIndicatorL.gameObject.GetComponent<Image>().material = grab;
 
@@ -71,10 +71,10 @@ public class Step3_RemoveCast : MonoBehaviour
             isGrabLeft = true;  
         }
         //*/
-        else if (controller.gameObject.name != "LeftHandCollider" && !CIM.isGetGripL)
+        else if (controller.gameObject.name != "LeftHandCollider" || controller == null || !CIM.isGetGripL)
         {
-            //ctrlGuideLeft.transform.GetChild(0).gameObject.SetActive(true);
-            ctrlGuideLeft.transform.GetComponentInChildren<SkinnedMeshRenderer>().material.color = originColor;
+            ctrlGuideLeft.transform.GetChild(0).gameObject.SetActive(true);
+            //ctrlGuideLeft.transform.GetComponentInChildren<SkinnedMeshRenderer>().material.color = originColor;
 
             grabGuideIndicatorL.gameObject.GetComponent<Image>().material = ungrab;
 
@@ -85,35 +85,39 @@ public class Step3_RemoveCast : MonoBehaviour
             isGrabLeft = false;
         }
         //*/
+    }
 
+    public void GrabCastR(Collider controller)
+    {
         if (controller.CompareTag("ControllerRight") && CIM.isGetGripR)
         {
-            //ctrlGuideRight.transform.GetChild(0).gameObject.SetActive(false);
-            ctrlGuideRight.transform.GetComponentInChildren<SkinnedMeshRenderer>().material.color = Color.white;
+            ctrlGuideRight.transform.GetChild(0).gameObject.SetActive(false);
+            //ctrlGuideRight.transform.GetComponentInChildren<SkinnedMeshRenderer>().material.color = Color.white;
 
             grabGuideIndicatorR.gameObject.GetComponent<Image>().material = grab;
 
             //controller.transform.GetChild(0).gameObject.SetActive(false);
+            ctrlGuideLeft.SetActive(true);
+            grabGuideIndicatorL.gameObject.SetActive(true);
+
 
             isGrabRight = true;
         }
         //*/
-        else if (controller.gameObject.name != "RightHandCollider" && !CIM.isGetGripR)
+        else if (controller.gameObject.name != "RightHandCollider" || controller == null || !CIM.isGetGripR)
         {
-            //ctrlGuideRight.transform.GetChild(0).gameObject.SetActive(true);
-            ctrlGuideRight.transform.GetComponentInChildren<SkinnedMeshRenderer>().material.color = originColor;
+            ctrlGuideRight.transform.GetChild(0).gameObject.SetActive(true);
+            //ctrlGuideRight.transform.GetComponentInChildren<SkinnedMeshRenderer>().material.color = originColor;
 
             grabGuideIndicatorR.gameObject.GetComponent<Image>().material = ungrab;
 
             //controller.transform.GetChild(0).gameObject.SetActive(true);
+            ctrlGuideLeft.SetActive(false);
+            grabGuideIndicatorL.gameObject.SetActive(false);
 
             isGrabRight = false;
         }
         //*/
     }
 
-    public void RemoveCast()
-    {
-
-    }
 }

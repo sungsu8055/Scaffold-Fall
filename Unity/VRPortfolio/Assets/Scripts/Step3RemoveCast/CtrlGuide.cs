@@ -8,8 +8,14 @@ public class CtrlGuide : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        // Debug.Log(other.gameObject.name);
-
-        RC.GrabCast(other);
+        if (this.transform.name.Contains("Left"))
+        {
+            RC.GrabCastL(other);
+        }
+        else
+        {
+            RC.GrabCastR(other);
+        }
+        
     }
 }
