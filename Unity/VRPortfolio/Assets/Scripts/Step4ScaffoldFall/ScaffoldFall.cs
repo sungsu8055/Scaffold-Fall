@@ -11,6 +11,7 @@ public class ScaffoldFall : MonoBehaviour
     public Transform fallPos;
     public Transform hangingPos;
     public ControllerPullDetect_Right CPDR;
+    public ControllerPullDetect_Left CPDL;
     public PlayerCtrl player;
     public Transform popupPos;
     private Transform accidentDescriptionCV;
@@ -42,7 +43,7 @@ public class ScaffoldFall : MonoBehaviour
     {
         if (player.p_State == PlayerCtrl.PlayerState.Danger)
         {
-            if (CPDR.pullObjectRight)
+            if (CPDR.pullObjectRight && CPDL.pullObjectLeft)
             {
                 if (!isFellDown)
                 {
@@ -56,7 +57,7 @@ public class ScaffoldFall : MonoBehaviour
         }
         else if (player.p_State == PlayerCtrl.PlayerState.Safety)
         {
-            if (CPDR.pullObjectRight)
+            if (CPDR.pullObjectRight && CPDL.pullObjectLeft)
             {
                 if (!isFellDown)
                 {
@@ -118,8 +119,9 @@ public class ScaffoldFall : MonoBehaviour
 
     void ResetExperienceConditions()
     {
-        // 플레이어 상태 변경
-        player.p_State = PlayerCtrl.PlayerState.EnterZone;
+        // 플레이어 상태 원복
+        player.p_State = PlayerCtrl.PlayerState.Working;
+
         // 거푸집 삭제
         cast1.GetComponent<RemovePlateInteractable>().Destroy();
         cast2.GetComponent<RemovePlateInteractable>().Destroy();
@@ -138,8 +140,14 @@ public class ScaffoldFall : MonoBehaviour
         // UI 제거
         accidentDescriptionUI.gameObject.SetActive(false);
         accidentDescriptionCV.gameObject.SetActive(false);
+
+        // 거푸집 제거 안내 UI 원복
+        RNC.RC.instructionUI.transform.position = RNC.RC.instructionUIOriginPos;
+        RNC.RC.instructionText.text = "거푸집 탈형 작업을 진행하십시오.";
+
         // 플레이어 위치 원복
         player.transform.SetPositionAndRotation(startPosSF.position, startPosSF.rotation);
+
         // 안전장구 착용 단계 활성화
         wearSafetyGear.SetActive(true);
     }

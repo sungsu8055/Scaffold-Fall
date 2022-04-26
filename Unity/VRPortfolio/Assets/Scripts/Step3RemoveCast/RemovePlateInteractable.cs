@@ -13,8 +13,10 @@ public class RemovePlateInteractable : XRGrabInteractable
     // Attach Point Rotation 기본값 초기화용 변수
     private Quaternion attachOriginRotation;
 
+    public Step3_RemoveCast RC;
+
     public PlayerCtrl player;
-    public ScaffoldFall SF;
+    // public ScaffoldFall SF;
 
     // 당기기 동작 유무 확인용 클래스
     public ControllerPullDetect_Left CPDL;
@@ -35,15 +37,20 @@ public class RemovePlateInteractable : XRGrabInteractable
 
     void FixedUpdate()
     {
-        if(CPDR.pullObjectRight && selectingInteractor)
+        if((CPDR.pullObjectRight && CPDL.pullObjectLeft) && selectingInteractor)
         {
             Debug.Log("거푸집 제거");
             this.trackPosition = true;
             this.trackRotation = true;
+            this.GetComponent<Rigidbody>().isKinematic = false;         
+
+            RC.PullFormwork();
+
             restoreTrackOption = false;
             CPDR.pullObjectRight = false;
+            CPDL.pullObjectLeft = false;            
         }
-        if(!CPDR.pullObjectRight && restoreTrackOption)
+        if((!CPDR.pullObjectRight && !CPDL.pullObjectLeft) && restoreTrackOption)
         {
             Debug.Log("거푸집 고정");
             this.trackPosition = false;

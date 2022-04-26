@@ -23,6 +23,7 @@ public class PlayerCtrl : MonoBehaviour
     {
         Idle,
         EnterZone,
+        Working,
         Danger,
         Safety
     }

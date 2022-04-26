@@ -4,17 +4,11 @@ using UnityEngine;
 
 public class ControllerPullDetect_Right : MonoBehaviour
 {
-    public ControllerInputManager CIM;
     public float originZPos;
     public float prevZPos;
     public bool pullObjectRight = false;
 
     private float checkDelay;
-
-    void Start()
-    {
-        
-    }
 
     void FixedUpdate()
     {
@@ -27,32 +21,15 @@ public class ControllerPullDetect_Right : MonoBehaviour
             checkDelay = 0f;
         }
 
-        if ((prevZPos - originZPos) >= 0.25f)
+        if ((prevZPos - originZPos) >= 0.3f)
         {
             pullObjectRight = true;
             Debug.Log("오른손 당김");
         }
-        else if((prevZPos - originZPos) < 0.25f)
+        else if((prevZPos - originZPos) < 0.3f)
         {
             pullObjectRight = false;
             Debug.Log("오른손 대기");
         }
-
-        //StartCoroutine(PullingRight());
     }
-
-    /*/
-    public IEnumerator PullingRight()
-    {
-        if ((prevZPos - originZPos) >= 0.25f)
-        {
-            Debug.Log("오른손 당김");
-            pullObjectRight = true;
-        }
-
-        yield return new WaitForSeconds(1.0f);
-
-        pullObjectRight = false;
-    }
-    //*/
 }

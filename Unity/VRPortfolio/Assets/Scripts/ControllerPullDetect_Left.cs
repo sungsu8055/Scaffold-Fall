@@ -8,39 +8,28 @@ public class ControllerPullDetect_Left : MonoBehaviour
     public float prevZPos;
     public bool pullObjectLeft = false;
 
-    float checkDelay;
+    private float checkDelay;
 
-    void Start()
-    {
-        
-    }
-
-    void Update()
+    void FixedUpdate()
     {
         checkDelay += Time.deltaTime;
         originZPos = this.transform.position.z;
 
-        if (checkDelay >= 0.8f)
+        if (checkDelay >= 0.6f)
         {            
             prevZPos = originZPos;
             checkDelay = 0f;
         }
 
-       // StartCoroutine(PullingLeft());
-
-    }
-
-    public IEnumerator PullingLeft()
-    {
-        if ((prevZPos - originZPos) >= 0.25f)
+        if ((prevZPos - originZPos) >= 0.3f)
         {
-            Debug.Log("¿Þ¼Õ ´ç±è");
             pullObjectLeft = true;
+            Debug.Log("¿Þ¼Õ ´ç±è");
         }
-
-
-        yield return new WaitForSeconds(1.0f);
-
-        pullObjectLeft = false;
+        else if ((prevZPos - originZPos) < 0.3f)
+        {
+            pullObjectLeft = false;
+            Debug.Log("¿Þ¼Õ ´ë±â");
+        }
     }
 }

@@ -10,12 +10,11 @@ public class CtrlGuide : MonoBehaviour
     {
         if (this.transform.name.Contains("Left"))
         {
-            RC.GrabCastL(other);
+            RC.GrabFormworkL(other);
         }
         else
         {
-            RC.GrabCastR(other);
-        }
-        
+            RC.GrabFormworkR(other);
+        }        
     }
 }

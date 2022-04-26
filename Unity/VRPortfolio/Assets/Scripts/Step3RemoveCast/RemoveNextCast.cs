@@ -12,12 +12,10 @@ public class RemoveNextCast : MonoBehaviour
     public Transform nextCastPos;
     public DetectSafetyGear DSG;
 
-    public bool nextCastPosComplete = false;
+    public Step3_RemoveCast RC;
+    private Vector3 originPos;
 
-    void Start()
-    {
-        
-    }
+    public bool nextCastPosComplete = false;
 
     void Update()
     {
@@ -26,6 +24,8 @@ public class RemoveNextCast : MonoBehaviour
             player.DOMove(nextCastPos.position, 1.0f).SetDelay(1.0f);
             RPI.restoreTrackOption = true;
             nextCastPosComplete = true;
+
+            RC.RemoveSecondFormwork();
 
             if (DSG.detectSafetyHat == false && DSG.detectSafetyBelt == false)
             {
