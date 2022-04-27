@@ -17,6 +17,7 @@ public class ScaffoldFall : MonoBehaviour
     private Transform accidentDescriptionCV;
     public Transform accidentDescriptionUI;
     public Transform accidentPreventionDescriptionUI;
+    public Transform blood;
 
     [Header("ResetExperienceConditions")]
     public Transform cast1;
@@ -77,7 +78,8 @@ public class ScaffoldFall : MonoBehaviour
         player.transform.DOShakePosition(1.5f, axisShakeStrength, vibrato, randomness).SetDelay(0.5f);
         player.transform.DORotateQuaternion(spinningPos.rotation, 1.5f).SetDelay(1.8f);
         player.transform.DOMove(fallPos.position, 1.5f).SetEase(Ease.OutBounce).SetDelay(3.0f);
-        player.transform.DORotateQuaternion(fallPos.rotation, 0.5f).SetDelay(3.5f);        
+        player.transform.DORotateQuaternion(fallPos.rotation, 0.5f).SetDelay(3.5f);
+        blood.DOScale(1.0f, 0.5f).SetDelay(3.5f);
     }
 
     void FallSafely()
@@ -125,7 +127,6 @@ public class ScaffoldFall : MonoBehaviour
         // 거푸집 삭제
         cast1.GetComponent<RemovePlateInteractable>().Destroy();
         cast2.GetComponent<RemovePlateInteractable>().Destroy();
-
         cast1Safe.transform.gameObject.SetActive(true);
         cast2Safe.transform.gameObject.SetActive(true);
         Debug.Log("거푸집 위치 원복 진행");
@@ -144,6 +145,9 @@ public class ScaffoldFall : MonoBehaviour
         // 거푸집 제거 안내 UI 원복
         RNC.RC.instructionUI.transform.position = RNC.RC.instructionUIOriginPos;
         RNC.RC.instructionText.text = "거푸집 탈형 작업을 진행하십시오.";
+
+        // 혈흔 제거
+        blood.localScale = Vector3.zero;
 
         // 플레이어 위치 원복
         player.transform.SetPositionAndRotation(startPosSF.position, startPosSF.rotation);

@@ -16,11 +16,11 @@ public class Step3_RemoveCast : MonoBehaviour
 
     public GameObject ctrlGuideLeft;
     public GameObject ctrlGuideRight;
-
     public GameObject grabGuideIndicatorL;
     public GameObject grabGuideIndicatorR;
     public Material grab;
     public Material ungrab;
+    public MeshRenderer formworkLoadingPlace;
     Color originColor;
 
     public bool isGrabLeft = false;
@@ -76,12 +76,14 @@ public class Step3_RemoveCast : MonoBehaviour
 
             grabGuideIndicatorL.GetComponent<Image>().material = grab;
 
-            instructionText.text = "양손을 몸쪽으로 세게 당겨 거푸집을 뜯어내십시오.";
+            //instructionText.text = "양손을 몸쪽으로 세게 당겨 거푸집을 뜯어내십시오.";
             //Debug.Log(controller.gameObject.name);
 
             // player.p_State = PlayerCtrl.PlayerState.WorkingProgress;
+            
+            instructionText.text = "양손을 몸쪽으로 세게 당겨 거푸집을 뜯어내십시오.";
 
-            isGrabLeft = true;  
+            isGrabLeft = true;
         }
         //*/
         else if (controller.gameObject.name != "LeftHandCollider" || controller == null || !CIM.isGetGripL)
@@ -94,6 +96,8 @@ public class Step3_RemoveCast : MonoBehaviour
             //controller.transform.GetChild(0).gameObject.SetActive(true);
 
             // player.p_State = PlayerCtrl.PlayerState.EnterZone;
+
+            instructionText.text = "표시된 부분을 왼손으로 주먹을 쥐어 잡고 유지하십시오.";
 
             isGrabLeft = false;
         }
@@ -113,7 +117,14 @@ public class Step3_RemoveCast : MonoBehaviour
             ctrlGuideLeft.SetActive(true);
             grabGuideIndicatorL.SetActive(true);
 
-            instructionText.text = "표시된 부분을 왼손으로 주먹을 쥐어 잡고 유지하십시오.";
+            if (!isGrabRight && !isGrabLeft)
+            {
+                instructionText.text = "표시된 부분을 왼손으로 주먹을 쥐어 잡고 유지하십시오.";
+            }
+            else if (isGrabLeft && isGrabRight)
+            {
+                instructionText.text = "양손을 몸쪽으로 세게 당겨 거푸집을 뜯어내십시오.";
+            }
 
             isGrabRight = true;
         }
@@ -126,8 +137,13 @@ public class Step3_RemoveCast : MonoBehaviour
             grabGuideIndicatorR.GetComponent<Image>().material = ungrab;
 
             //controller.transform.GetChild(0).gameObject.SetActive(true);
-            ctrlGuideLeft.SetActive(false);
-            grabGuideIndicatorL.SetActive(false);
+            if (!isGrabLeft)
+            {
+                ctrlGuideLeft.SetActive(false);
+                grabGuideIndicatorL.SetActive(false);
+            }
+            
+            instructionText.text = "표시된 부분을 오른손으로 주먹을 쥐어 잡고 유지하십시오.";
 
             isGrabRight = false;
         }
@@ -138,6 +154,8 @@ public class Step3_RemoveCast : MonoBehaviour
     {
         if(player.p_State == PlayerCtrl.PlayerState.Working)
         {
+            formworkLoadingPlace.enabled = true;
+
             instructionText.text = "두 손으로 잡은 상태로 왼쪽에 표시된 위치에 놓아주십시오.";
 
             // 컨트롤 가이드 UI 비활성

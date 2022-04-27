@@ -21,6 +21,7 @@ public class RemoveNextCast : MonoBehaviour
     {
         if (SKInteractor.hasSelection == true && nextCastPosComplete == false)
         {
+            this.GetComponent<MeshRenderer>().enabled = false;
             player.DOMove(nextCastPos.position, 1.0f).SetDelay(1.0f);
             RPI.restoreTrackOption = true;
             nextCastPosComplete = true;
