@@ -35,6 +35,10 @@ public class Step3_RemoveCast : MonoBehaviour
 
     public void StartInstruction()
     {
+        if(player.p_State == PlayerCtrl.PlayerState.Safety)
+        {
+
+        }
         instructionUI.SetActive(true);
     }
 
