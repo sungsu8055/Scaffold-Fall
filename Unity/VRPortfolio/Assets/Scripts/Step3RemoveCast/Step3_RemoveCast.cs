@@ -36,8 +36,6 @@ public class Step3_RemoveCast : MonoBehaviour
     public void StartInstruction()
     {
         instructionUI.SetActive(true);
-
-        // instructionUI.transform.position = popupPos.position;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -52,7 +50,6 @@ public class Step3_RemoveCast : MonoBehaviour
 
     public void StartRemove()
     {
-        //instructionUI.SetActive(false);
         // OK 버튼 및 배경이미지 비활성화
         instructionUI.transform.GetChild(2).gameObject.SetActive(false);
         instructionUI.transform.GetChild(0).gameObject.SetActive(false);
@@ -60,10 +57,8 @@ public class Step3_RemoveCast : MonoBehaviour
         // UI안내 문구 수정
         instructionText.text = "표시된 부분을 오른손으로 주먹을 쥐어 잡고 유지하십시오.";
 
-        // ctrlGuideLeft.SetActive(true);
         ctrlGuideRight.SetActive(true);
 
-        // grabGuideIndicatorL.gameObject.SetActive(true);
         grabGuideIndicatorR.SetActive(true);
     }
 
@@ -72,36 +67,23 @@ public class Step3_RemoveCast : MonoBehaviour
         if(controller.CompareTag("ControllerLeft") && CIM.isGetGripL)
         {
             ctrlGuideLeft.transform.GetChild(0).gameObject.SetActive(false);
-            //ctrlGuideLeft.transform.GetComponentInChildren<SkinnedMeshRenderer>().material.color = Color.white;
 
             grabGuideIndicatorL.GetComponent<Image>().material = grab;
 
-            //instructionText.text = "양손을 몸쪽으로 세게 당겨 거푸집을 뜯어내십시오.";
-            //Debug.Log(controller.gameObject.name);
-
-            // player.p_State = PlayerCtrl.PlayerState.WorkingProgress;
-            
             instructionText.text = "양손을 몸쪽으로 세게 당겨 거푸집을 뜯어내십시오.";
 
             isGrabLeft = true;
         }
-        //*/
         else if (controller.gameObject.name != "LeftHandCollider" || controller == null || !CIM.isGetGripL)
         {
             ctrlGuideLeft.transform.GetChild(0).gameObject.SetActive(true);
-            //ctrlGuideLeft.transform.GetComponentInChildren<SkinnedMeshRenderer>().material.color = originColor;
 
             grabGuideIndicatorL.GetComponent<Image>().material = ungrab;
-
-            //controller.transform.GetChild(0).gameObject.SetActive(true);
-
-            // player.p_State = PlayerCtrl.PlayerState.EnterZone;
 
             instructionText.text = "표시된 부분을 왼손으로 주먹을 쥐어 잡고 유지하십시오.";
 
             isGrabLeft = false;
         }
-        //*/
     }
 
     public void GrabFormworkR(Collider controller)
@@ -109,11 +91,9 @@ public class Step3_RemoveCast : MonoBehaviour
         if (controller.CompareTag("ControllerRight") && CIM.isGetGripR)
         {
             ctrlGuideRight.transform.GetChild(0).gameObject.SetActive(false);
-            //ctrlGuideRight.transform.GetComponentInChildren<SkinnedMeshRenderer>().material.color = Color.white;
 
             grabGuideIndicatorR.GetComponent<Image>().material = grab;
 
-            //controller.transform.GetChild(0).gameObject.SetActive(false);
             ctrlGuideLeft.SetActive(true);
             grabGuideIndicatorL.SetActive(true);
 
@@ -128,15 +108,12 @@ public class Step3_RemoveCast : MonoBehaviour
 
             isGrabRight = true;
         }
-        //*/
         else if (controller.gameObject.name != "RightHandCollider" || controller == null || !CIM.isGetGripR)
         {
             ctrlGuideRight.transform.GetChild(0).gameObject.SetActive(true);
-            //ctrlGuideRight.transform.GetComponentInChildren<SkinnedMeshRenderer>().material.color = originColor;
 
             grabGuideIndicatorR.GetComponent<Image>().material = ungrab;
 
-            //controller.transform.GetChild(0).gameObject.SetActive(true);
             if (!isGrabLeft)
             {
                 ctrlGuideLeft.SetActive(false);
@@ -147,7 +124,6 @@ public class Step3_RemoveCast : MonoBehaviour
 
             isGrabRight = false;
         }
-        //*/
     }
 
     public void PullFormwork()
