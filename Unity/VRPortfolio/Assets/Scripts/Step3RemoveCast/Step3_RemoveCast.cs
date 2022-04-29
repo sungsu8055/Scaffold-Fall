@@ -74,7 +74,7 @@ public class Step3_RemoveCast : MonoBehaviour
 
             grabGuideIndicatorL.GetComponent<Image>().material = grab;
 
-            instructionText.text = "양손을 몸쪽으로 세게 당겨 거푸집을 뜯어내십시오.";
+            instructionText.text = "양손을 몸 쪽으로 세게 당겨 거푸집을 뜯어내십시오.";
 
             isGrabLeft = true;
         }
@@ -136,7 +136,7 @@ public class Step3_RemoveCast : MonoBehaviour
         {
             formworkLoadingPlace.enabled = true;
 
-            instructionText.text = "두 손으로 잡은 상태로 왼쪽에 표시된 위치에 놓아주십시오.";
+            instructionText.text = "두 손으로 잡은 상태를 유지하며 왼쪽에 표시된 위치에 놓아주십시오.";
 
             // 컨트롤 가이드 UI 비활성
             grabGuideIndicatorL.SetActive(false);
@@ -157,6 +157,6 @@ public class Step3_RemoveCast : MonoBehaviour
     public void RemoveSecondFormwork()
     {
         instructionUI.transform.position = removeSecondFormworkUIPos.position;
-        instructionText.text = "앞서 진행한 작업과 동일하게 양손으로 거푸집을 잡아 당겨 제거하십시오.";
+        instructionText.text = "앞서 진행한 작업과 동일한 방법으로 양손으로 거푸집을 잡아당겨 제거하십시오.";
     }
 }
