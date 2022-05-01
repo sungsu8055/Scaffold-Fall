@@ -11,18 +11,23 @@ public class Step2_ClimbLadderCtrl : MonoBehaviour
 
     public GameObject approachGuide;
 
+    [Header("Audio")]
+    public AudioManager audioManager;
+    public AudioClip moveToLadder;
+    public AudioClip select;
+
     void Start()
     {
-        StartCoroutine(StartClimbLadder());
+        Invoke("StartClimbLadder", 1.0f);
     }
 
-    IEnumerator StartClimbLadder()
+    void StartClimbLadder()
     {
-        yield return new WaitForSeconds(0.5f);
-
         climbInstruction.SetActive(true);
 
         climbInstruction.transform.SetPositionAndRotation(popupPos.position, popupPos.rotation);
+        // 안내 음성 재생
+        audioManager.PlayAudioOnce(moveToLadder);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,6 +44,9 @@ public class Step2_ClimbLadderCtrl : MonoBehaviour
         player.GetComponent<CharacterController>().enabled = true;
 
         climbInstruction.gameObject.SetActive(false);
+
+        // 선택 효과음 재생
+        audioManager.PlayAudioOnce(select);
 
         approachGuide.SetActive(true);
     }

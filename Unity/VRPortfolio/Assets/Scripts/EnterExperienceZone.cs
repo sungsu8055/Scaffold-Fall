@@ -12,6 +12,11 @@ public class EnterExperienceZone : MonoBehaviour
 
     public GameObject nextStep;
 
+    [Header("Audio")]
+    public AudioManager audioManager;
+    public AudioClip entryZone;
+    public AudioClip select;
+
     public void ZoneEntry()
     {
         // 체험 소개 및 진행 유무 선택 UI 출력
@@ -19,6 +24,9 @@ public class EnterExperienceZone : MonoBehaviour
 
         // 체험 존 소개 UI 위치를 Popup position 으로 재설정
         zoneEntryUI.SetPositionAndRotation(popupPos.position, popupPos.rotation);
+
+        // 체험존 입장 안내 재생
+        audioManager.PlayAudioOnce(entryZone);
 
         // UI 내용 확인 및 집중을 위해 이동 기능 정지(초기 위치 원복을 위해 함수 호출 시 CC가 활성화 상태이면 작동하지 않음)
         player.GetComponent<CharacterController>().enabled = false;
@@ -42,10 +50,12 @@ public class EnterExperienceZone : MonoBehaviour
     {
         // Button - OnClick 옵션에서 포인터한 오브젝트를 파라미터로 받아 위치 수정 시 이용
         player.transform.SetPositionAndRotation(startPos.position, startPos.rotation);
-        // Character Controller 활성
-        // player.GetComponent<CharacterController>().enabled = true;
+
         // 체험 소개 및 진행 유무 UI 비활성
         zoneEntryUI.gameObject.SetActive(false);
+
+        // 선택 효과음 재생
+        audioManager.PlayAudioOnce(select);
 
         nextStep.SetActive(true);
     }

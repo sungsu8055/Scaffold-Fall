@@ -24,8 +24,13 @@ public class RemovePlateInteractable : XRGrabInteractable
 
     public bool restoreTrackOption = false;
 
+    [Header("Audio")]
+    private AudioSource formworkRemoved;
+
     void Start()
     {
+        formworkRemoved = this.GetComponent<AudioSource>();
+
         // foreach문으로 두번째 그랩 state 마다 아래 작업 실행
         foreach (var item in secondGrabPoint)
         {
@@ -40,9 +45,16 @@ public class RemovePlateInteractable : XRGrabInteractable
         if((CPDR.pullObjectRight && CPDL.pullObjectLeft) && selectingInteractor)
         {
             Debug.Log("거푸집 제거");
+
+            formworkRemoved.Play();
+            if (!formworkRemoved.isPlaying)
+            {
+                formworkRemoved.enabled = false;
+            }            
+
             this.trackPosition = true;
             this.trackRotation = true;
-            this.GetComponent<Rigidbody>().isKinematic = false;         
+            // this.GetComponent<Rigidbody>().isKinematic = false;            
 
             RC.PullFormwork();
 

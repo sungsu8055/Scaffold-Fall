@@ -17,4 +17,16 @@ public class CtrlGuide : MonoBehaviour
             RC.GrabFormworkR(other);
         }        
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (this.transform.name.Contains("Left"))
+        {
+            RC.UngrabFormworkL(other);
+        }
+        else
+        {
+            RC.UngrabFormworkR(other);
+        }
+    }
 }
