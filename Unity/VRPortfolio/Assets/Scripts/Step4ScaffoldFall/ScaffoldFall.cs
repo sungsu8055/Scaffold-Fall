@@ -35,6 +35,10 @@ public class ScaffoldFall : MonoBehaviour
 
     private bool isFellDown = false;
 
+    [Header("Audio")]
+    public AudioManager audioManager;
+    public AudioClip fallDie;
+
     void Start()
     {
         accidentDescriptionCV = this.transform.GetChild(0);

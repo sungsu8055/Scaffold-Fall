@@ -17,10 +17,15 @@ public class RemoveNextCast : MonoBehaviour
 
     public bool nextCastPosComplete = false;
 
+    [Header("Audio")]
+    public AudioSource audioSource;
+
     void Update()
     {
         if (SKInteractor.hasSelection == true && nextCastPosComplete == false)
         {
+            audioSource.Play();
+
             this.GetComponent<MeshRenderer>().enabled = false;
             player.DOMove(nextCastPos.position, 1.0f).SetDelay(1.0f);
             RPI.restoreTrackOption = true;

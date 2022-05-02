@@ -16,7 +16,6 @@ public class RemovePlateInteractable : XRGrabInteractable
     public Step3_RemoveCast RC;
 
     public PlayerCtrl player;
-    // public ScaffoldFall SF;
 
     // 당기기 동작 유무 확인용 클래스
     public ControllerPullDetect_Left CPDL;
@@ -24,12 +23,8 @@ public class RemovePlateInteractable : XRGrabInteractable
 
     public bool restoreTrackOption = false;
 
-    [Header("Audio")]
-    private AudioSource formworkRemoved;
-
     void Start()
     {
-        formworkRemoved = this.GetComponent<AudioSource>();
 
         // foreach문으로 두번째 그랩 state 마다 아래 작업 실행
         foreach (var item in secondGrabPoint)
@@ -46,17 +41,11 @@ public class RemovePlateInteractable : XRGrabInteractable
         {
             Debug.Log("거푸집 제거");
 
-            formworkRemoved.Play();
-            if (!formworkRemoved.isPlaying)
-            {
-                formworkRemoved.enabled = false;
-            }            
-
             this.trackPosition = true;
             this.trackRotation = true;
             // this.GetComponent<Rigidbody>().isKinematic = false;            
 
-            RC.PullFormwork();
+            StartCoroutine(RC.PullFormwork());
 
             restoreTrackOption = false;
             CPDR.pullObjectRight = false;
