@@ -21,7 +21,7 @@ public class Step2_ClimbLadderCtrl : MonoBehaviour
         Invoke("StartClimbLadder", 1.0f);
     }
 
-    void StartClimbLadder()
+    public void StartClimbLadder()
     {
         climbInstruction.SetActive(true);
 

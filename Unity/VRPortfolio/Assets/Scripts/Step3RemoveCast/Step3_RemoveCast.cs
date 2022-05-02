@@ -165,34 +165,6 @@ public class Step3_RemoveCast : MonoBehaviour
         }
     }
 
-    /*/
-    public void PullFormwork()
-    {
-        if(player.p_State == PlayerCtrl.PlayerState.Working)
-        {
-            formworkLoadingPlace.enabled = true;
-
-            // 컨트롤 가이드 UI 비활성
-            grabGuideIndicatorL.SetActive(false);
-            grabGuideIndicatorR.SetActive(false);
-
-            ctrlGuideLeft.SetActive(false);
-            ctrlGuideRight.SetActive(false);
-
-            instructionText.text = "두 손으로 잡은 상태를 유지하며 왼쪽에 표시된 위치에 놓아주십시오.";
-            // 거푸집 적재 안내 음성 재생
-            audioManager.PlayAudioOnce(loadingFormwork);
-        }
-        else if(player.p_State == PlayerCtrl.PlayerState.Danger || player.p_State == PlayerCtrl.PlayerState.Safety)
-        {
-            instructionUI.transform.GetChild(2).gameObject.SetActive(true);
-            instructionUI.transform.GetChild(0).gameObject.SetActive(true);
-
-            instructionUI.SetActive(false);
-        }
-    }
-    //*/
-
     public IEnumerator PullFormwork()
     {
         if (player.p_State == PlayerCtrl.PlayerState.Working)
@@ -208,7 +180,7 @@ public class Step3_RemoveCast : MonoBehaviour
 
             audioManager.PlayAudioOnce(formworkRemoved);
 
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1.2f);
 
             instructionText.text = "두 손으로 잡은 상태를 유지하며 왼쪽에 표시된 위치에 놓아주십시오.";
             // 거푸집 적재 안내 음성 재생
@@ -223,8 +195,10 @@ public class Step3_RemoveCast : MonoBehaviour
         }
     }
 
-    public void RemoveSecondFormwork()
+    public IEnumerator RemoveSecondFormwork()
     {
+        yield return new WaitForSeconds(2.0f);
+
         instructionUI.transform.position = removeSecondFormworkUIPos.position;
         instructionText.text = "앞서 진행한 작업과 동일한 방법으로 양손으로 거푸집을 잡아당겨 제거하십시오.";
         // 두번째 거푸집 제거 안내 음성 재생

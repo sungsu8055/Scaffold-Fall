@@ -31,7 +31,7 @@ public class RemoveNextCast : MonoBehaviour
             RPI.restoreTrackOption = true;
             nextCastPosComplete = true;
 
-            RC.RemoveSecondFormwork();
+            StartCoroutine(RC.RemoveSecondFormwork());
 
             if (DSG.detectSafetyHat == false && DSG.detectSafetyBelt == false)
             {

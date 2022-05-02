@@ -38,6 +38,8 @@ public class ScaffoldFall : MonoBehaviour
     [Header("Audio")]
     public AudioManager audioManager;
     public AudioClip fallDie;
+    public AudioClip accident;
+    public AudioClip accidentPrevent;
 
     void Start()
     {
@@ -81,6 +83,7 @@ public class ScaffoldFall : MonoBehaviour
         player.transform.DOMove(spinningPos.position, 2.0f);
         player.transform.DOShakePosition(1.5f, axisShakeStrength, vibrato, randomness).SetDelay(0.5f);
         player.transform.DORotateQuaternion(spinningPos.rotation, 1.5f).SetDelay(1.8f);
+        StartCoroutine(audioManager.PlayAudioDelayed(fallDie, 2.8f));
         player.transform.DOMove(fallPos.position, 1.5f).SetEase(Ease.OutBounce).SetDelay(3.0f);
         player.transform.DORotateQuaternion(fallPos.rotation, 0.5f).SetDelay(3.5f);
         blood.DOScale(1.0f, 0.5f).SetDelay(3.5f);
@@ -91,6 +94,7 @@ public class ScaffoldFall : MonoBehaviour
         player.transform.DOMove(spinningPos.position, 2.0f);
         player.transform.DOShakePosition(1.5f, axisShakeStrength, vibrato, randomness).SetDelay(0.5f);
         player.transform.DORotateQuaternion(spinningPos.rotation, 1.5f).SetDelay(1.8f);
+        StartCoroutine(audioManager.PlayAudioDelayed(fallDie, 3.0f));
         player.transform.DOMove(hangingPos.position, 1.0f).SetDelay(3.0f);
         player.transform.DORotateQuaternion(hangingPos.rotation, 0.5f).SetDelay(3.5f);
         player.transform.DOShakePosition(7.0f, 0.4f, 2, 0.0f).SetDelay(3.9f);
@@ -104,7 +108,9 @@ public class ScaffoldFall : MonoBehaviour
         accidentDescriptionCV.SetPositionAndRotation(popupPos.position, popupPos.rotation);
         accidentDescriptionUI.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(5.0f);
+        audioManager.PlayAudioOnce(accident);
+
+        yield return new WaitForSeconds(12.0f);
 
         ResetExperienceConditions();
     }
@@ -117,7 +123,9 @@ public class ScaffoldFall : MonoBehaviour
         accidentDescriptionCV.SetPositionAndRotation(popupPos.position, popupPos.rotation);
         accidentPreventionDescriptionUI.gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(6.0f);
+        audioManager.PlayAudioOnce(accidentPrevent);
+
+        yield return new WaitForSeconds(12.0f);
 
         SceneManager.LoadScene(0);
     }
