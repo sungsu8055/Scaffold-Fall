@@ -11,6 +11,7 @@ public class WearSafetyGear : MonoBehaviour
     public GameObject safetyGearInstruction;
     public DetectSafetyGear DSG;
     public Step2_ClimbLadderCtrl CC;
+    public PlayerCtrl player;
 
     private bool wearingSafetyGearComplete = false;
 
@@ -28,6 +29,7 @@ public class WearSafetyGear : MonoBehaviour
         if(DSG.detectSafetyHat == true && DSG.detectSafetyBelt == true && !wearingSafetyGearComplete)
         {
             Debug.Log("안전 장구 착용 완료");
+            player.p_State = PlayerCtrl.PlayerState.Safety;
             CC.StartClimbLadder();
             wearingSafetyGearComplete = true;
         }

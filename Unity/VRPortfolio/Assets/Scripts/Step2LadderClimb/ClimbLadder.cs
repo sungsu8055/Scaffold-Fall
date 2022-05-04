@@ -6,6 +6,7 @@ using DG.Tweening;
 public class ClimbLadder : MonoBehaviour
 {
     public Step3_RemoveCast RC;
+    public EquippedSafetyBelt ESB;
 
     public Transform player;
     public Transform highPoint;
@@ -50,6 +51,13 @@ public class ClimbLadder : MonoBehaviour
 
         yield return new WaitForSeconds(1.0f);
 
-        RC.StartInstruction();
+        if(player.GetComponent<PlayerCtrl>().p_State == PlayerCtrl.PlayerState.Safety)
+        {
+            ESB.StartSafetyBeltFix();
+        }
+        else
+        {
+            RC.StartInstruction();
+        }
     }
 }

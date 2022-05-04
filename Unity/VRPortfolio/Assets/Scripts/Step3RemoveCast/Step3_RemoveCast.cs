@@ -46,6 +46,16 @@ public class Step3_RemoveCast : MonoBehaviour
 
     public void StartInstruction()
     {
+        /*/
+        if(player.p_State == PlayerCtrl.PlayerState.Safety)
+        {
+            instructionUI.SetActive(true);
+            instructionText.text = "오른쪽 비계 난간에 표시된 부분에 안전대를 결착하십시오.";
+
+            safetyBeltGuide.SetActive(true);
+        }
+        //*/
+
         instructionUI.SetActive(true);
 
         // 안내 음성 재생

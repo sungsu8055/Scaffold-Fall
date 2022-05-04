@@ -34,6 +34,7 @@ public class ScaffoldFall : MonoBehaviour
     public float randomness;
 
     private bool isFellDown = false;
+    private bool secondExperience = false;
 
     [Header("Audio")]
     public AudioManager audioManager;
@@ -58,6 +59,8 @@ public class ScaffoldFall : MonoBehaviour
 
                     StartCoroutine(AccidentDescription());
 
+                    secondExperience = true;
+
                     isFellDown = true;
                 }
             }
@@ -66,7 +69,7 @@ public class ScaffoldFall : MonoBehaviour
         {
             if (CPDR.pullObjectRight && CPDL.pullObjectLeft)
             {
-                if (!isFellDown)
+                if (!isFellDown && !secondExperience)
                 {
                     FallSafely();
 
@@ -156,7 +159,7 @@ public class ScaffoldFall : MonoBehaviour
 
         // 거푸집 제거 안내 UI 원복
         RNC.RC.instructionUI.transform.position = RNC.RC.instructionUIOriginPos;
-        RNC.RC.instructionText.text = "거푸집 탈형 작업을 진행하십시오.";
+        // RNC.RC.instructionText.text = "거푸집 탈형 작업을 진행하겠습니다. 이어지는 안내에 따라 작업을 진행해주십시오.";
 
         // 혈흔 제거
         blood.localScale = Vector3.zero;
