@@ -21,10 +21,13 @@ public class RemovePlateInteractable : XRGrabInteractable
     public ControllerPullDetect_Left CPDL;
     public ControllerPullDetect_Right CPDR;
 
-    public bool restoreTrackOption = false;
+    public bool trackOptionChanged = false;
+
+    private Rigidbody rigidbody;
 
     void Start()
     {
+        rigidbody = this.GetComponent<Rigidbody>();
 
         // foreach문으로 두번째 그랩 state 마다 아래 작업 실행
         foreach (var item in secondGrabPoint)
@@ -37,27 +40,33 @@ public class RemovePlateInteractable : XRGrabInteractable
 
     void FixedUpdate()
     {
-        if((CPDR.pullObjectRight && CPDL.pullObjectLeft) && selectingInteractor)
+        // selectingInteractor가 들어올 때만 트랙 옵션 활성,
+        // 다른 거푸집 오브젝트 트랙 옵션에 영향 미치는 것을 방지
+        if ((CPDR.pullObjectRight && CPDL.pullObjectLeft) && selectingInteractor)
         {
-            Debug.Log("거푸집 제거");
+            if (!trackOptionChanged)
+            {
+                Debug.Log("거푸집 제거");
+                this.GetComponent<AudioSource>().Play();
 
-            this.trackPosition = true;
-            this.trackRotation = true;
-            // this.GetComponent<Rigidbody>().isKinematic = false;            
+                this.trackPosition = true;
+                this.trackRotation = true;
+                trackOptionChanged = true;
 
-            StartCoroutine(RC.PullFormwork());
-
-            restoreTrackOption = false;
-            CPDR.pullObjectRight = false;
-            CPDL.pullObjectLeft = false;            
+                StartCoroutine(RC.PullFormwork());
+            }
         }
+
+        // 아래 트랙 옵션 원복 기능은 selectingInteractor 추가로 인해 사용하지 않게 됨
+        // 컨트롤러 당김 체크만으로 걸러냈을 때에는 모두가 영향을 받았으나 selectingInteractor가 없으면 기능 작동하지 않게 됨
+        /*/
         if((!CPDR.pullObjectRight && !CPDL.pullObjectLeft) && restoreTrackOption)
         {
             Debug.Log("거푸집 고정");
             this.trackPosition = false;
             this.trackRotation = false;
-            // restoreTrackOption = false;
         }
+        //*/
     }
 
     // Interactable의 업데이트 진행
@@ -102,6 +111,13 @@ public class RemovePlateInteractable : XRGrabInteractable
     {
         //Debug.Log("첫번째 그랩 풀림");
         base.OnSelectExited(interactor);
+
+        // 거푸집 제거(트랙 활성화) 진행 시 물리 작용 활성화
+        if(this.trackPosition && this.trackRotation)
+        {
+            rigidbody.isKinematic = false;
+            rigidbody.WakeUp();
+        }        
 
         secondHandInteractor = null;
         // 양손 상호작용 후 조정된 attach point의 rotation을 원복

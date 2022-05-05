@@ -33,8 +33,7 @@ public class ScaffoldFall : MonoBehaviour
     public int vibrato;
     public float randomness;
 
-    private bool isFellDown = false;
-    private bool secondExperience = false;
+    public bool isFellDown = true;
 
     [Header("Audio")]
     public AudioManager audioManager;
@@ -59,8 +58,6 @@ public class ScaffoldFall : MonoBehaviour
 
                     StartCoroutine(AccidentDescription());
 
-                    secondExperience = true;
-
                     isFellDown = true;
                 }
             }
@@ -69,7 +66,7 @@ public class ScaffoldFall : MonoBehaviour
         {
             if (CPDR.pullObjectRight && CPDL.pullObjectLeft)
             {
-                if (!isFellDown && !secondExperience)
+                if (!isFellDown)
                 {
                     FallSafely();
 
@@ -147,9 +144,7 @@ public class ScaffoldFall : MonoBehaviour
         Debug.Log("거푸집 위치 원복 진행");
 
         // 트랙 복구 옵션 원복
-        RNC.RPI.restoreTrackOption = true;
-
-        isFellDown = false;
+        // RNC.RPI.restoreTrackOption = true;
 
         // 2차 제거 위치 이동 체크 원복
         RNC.nextCastPosComplete = false;

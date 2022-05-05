@@ -19,10 +19,13 @@ public class EquippedSafetyBelt : MonoBehaviour
 
     [Header("Audio")]
     public AudioManager audioManager;
+    public AudioClip fixSafetyGear;
+    public AudioClip fixedSound;
 
     public void StartSafetyBeltFix()
     {
         fixInstructionUI.SetActive(true);
+        audioManager.PlayAudioOnce(fixSafetyGear);
 
         safetyBeltGuide.SetActive(true);
         originController.SetActive(false);
@@ -31,14 +34,38 @@ public class EquippedSafetyBelt : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        /*/
         if (other.CompareTag("ControllerRight"))
         {
             fixInstructionUI.SetActive(false);
+            audioManager.PlayAudioOnce(fixedSound);
 
             safetyBeltController.SetActive(false);
             originController.SetActive(true);
             safetyBeltGuide.SetActive(false);
             safetyBelt.SetActive(true);
+
+            RC.StartInstruction();
+        }
+        //*/
+
+        StartCoroutine(SafetyBeltFixed(other));
+
+    }
+
+    IEnumerator SafetyBeltFixed(Collider collider)
+    {
+        if (collider.CompareTag("ControllerRight"))
+        {
+            fixInstructionUI.SetActive(false);
+            audioManager.PlayAudioOnce(fixedSound);
+
+            safetyBeltController.SetActive(false);
+            originController.SetActive(true);
+            safetyBeltGuide.SetActive(false);
+            safetyBelt.SetActive(true);
+
+            yield return new WaitForSeconds(1.5f);
 
             RC.StartInstruction();
         }

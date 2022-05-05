@@ -35,7 +35,6 @@ public class Step3_RemoveCast : MonoBehaviour
     public AudioClip formworkRemove;
     public AudioClip loadingFormwork;
     public AudioClip removeSecondFormwork;
-    public AudioClip formworkRemoved;
 
     private void Start()
     {
@@ -46,16 +45,6 @@ public class Step3_RemoveCast : MonoBehaviour
 
     public void StartInstruction()
     {
-        /*/
-        if(player.p_State == PlayerCtrl.PlayerState.Safety)
-        {
-            instructionUI.SetActive(true);
-            instructionText.text = "오른쪽 비계 난간에 표시된 부분에 안전대를 결착하십시오.";
-
-            safetyBeltGuide.SetActive(true);
-        }
-        //*/
-
         instructionUI.SetActive(true);
 
         // 안내 음성 재생
@@ -181,6 +170,10 @@ public class Step3_RemoveCast : MonoBehaviour
         {
             formworkLoadingPlace.enabled = true;
 
+            // 다음 안내 음성 출력 대기 시간 동안, 이전 음성 출력 방지
+            instructionText.text = null;
+            audioManager.source.clip = null;
+
             // 컨트롤 가이드 UI 비활성
             grabGuideIndicatorL.SetActive(false);
             grabGuideIndicatorR.SetActive(false);
@@ -188,9 +181,7 @@ public class Step3_RemoveCast : MonoBehaviour
             ctrlGuideLeft.SetActive(false);
             ctrlGuideRight.SetActive(false);
 
-            audioManager.PlayAudioOnce(formworkRemoved);
-
-            yield return new WaitForSeconds(1.2f);
+            yield return new WaitForSeconds(1.0f);
 
             instructionText.text = "두 손으로 잡은 상태를 유지하며 왼쪽에 표시된 위치에 놓아주십시오.";
             // 거푸집 적재 안내 음성 재생
@@ -198,6 +189,7 @@ public class Step3_RemoveCast : MonoBehaviour
         }
         else if (player.p_State == PlayerCtrl.PlayerState.Danger || player.p_State == PlayerCtrl.PlayerState.Safety)
         {
+            // 안전 장비 착용 후 제거 단계를 위해 UI 상태 초기화
             instructionUI.transform.GetChild(2).gameObject.SetActive(true);
             instructionUI.transform.GetChild(0).gameObject.SetActive(true);
 

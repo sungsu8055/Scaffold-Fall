@@ -11,9 +11,8 @@ public class RemoveNextCast : MonoBehaviour
     public Transform player;
     public Transform nextCastPos;
     public DetectSafetyGear DSG;
-
+    public ScaffoldFall SF;
     public Step3_RemoveCast RC;
-    private Vector3 originPos;
 
     public bool nextCastPosComplete = false;
 
@@ -28,8 +27,9 @@ public class RemoveNextCast : MonoBehaviour
 
             this.GetComponent<MeshRenderer>().enabled = false;
             player.DOMove(nextCastPos.position, 1.0f).SetDelay(1.0f);
-            RPI.restoreTrackOption = true;
+            // RPI.restoreTrackOption = true;
             nextCastPosComplete = true;
+            SF.isFellDown = false;
 
             StartCoroutine(RC.RemoveSecondFormwork());
 

@@ -21,12 +21,12 @@ public class ControllerPullDetect_Right : MonoBehaviour
             checkDelay = 0f;
         }
 
-        if ((prevZPos - originZPos) >= 0.3f)
+        if ((prevZPos - originZPos) >= 0.25f)
         {
             pullObjectRight = true;
             Debug.Log("오른손 당김");
         }
-        else if((prevZPos - originZPos) < 0.3f)
+        else if((prevZPos - originZPos) < 0.25f)
         {
             pullObjectRight = false;
             Debug.Log("오른손 대기");

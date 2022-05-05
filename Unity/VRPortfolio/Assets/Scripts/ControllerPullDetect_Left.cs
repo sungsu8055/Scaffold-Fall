@@ -21,12 +21,12 @@ public class ControllerPullDetect_Left : MonoBehaviour
             checkDelay = 0f;
         }
 
-        if ((prevZPos - originZPos) >= 0.3f)
+        if ((prevZPos - originZPos) >= 0.25f)
         {
             pullObjectLeft = true;
             Debug.Log("¿Þ¼Õ ´ç±è");
         }
-        else if ((prevZPos - originZPos) < 0.3f)
+        else if ((prevZPos - originZPos) < 0.25f)
         {
             pullObjectLeft = false;
             Debug.Log("¿Þ¼Õ ´ë±â");
