@@ -6,12 +6,6 @@ public class AudioManager : MonoBehaviour
 {
     public AudioSource source;
 
-    private void Start()
-    {
-        source = gameObject.AddComponent<AudioSource>();
-        source.playOnAwake = false;
-    }
-
     public void PlayAudioOnce(AudioClip clip)
     {
         source.clip = clip;

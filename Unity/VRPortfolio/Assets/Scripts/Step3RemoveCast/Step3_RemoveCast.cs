@@ -47,6 +47,8 @@ public class Step3_RemoveCast : MonoBehaviour
     {
         instructionUI.SetActive(true);
 
+        instructionText.text = "거푸집 탈형 작업을 진행하겠습니다. 이어지는 안내에 따라 작업을 진행해주십시오.";
+        
         // 안내 음성 재생
         audioManager.PlayAudioOnce(startRemove);
     }
@@ -59,11 +61,12 @@ public class Step3_RemoveCast : MonoBehaviour
             // 선택 효과음 재생
             audioManager.PlayAudioOnce(select);
             // OK 버튼 및 배경이미지 비활성화
-            instructionUI.transform.GetChild(2).gameObject.SetActive(false);
             instructionUI.transform.GetChild(0).gameObject.SetActive(false);
+            instructionUI.transform.GetChild(2).gameObject.SetActive(false);
+            instructionUI.transform.GetChild(3).gameObject.SetActive(false);
 
             // 작업 절차 안내 실행 및 작업 상태로 전환
-            Invoke("StartRemove", 1.0f); 
+            Invoke("StartRemove", 0.7f); 
             player.p_State = PlayerCtrl.PlayerState.Working;
         }        
     }
@@ -190,8 +193,9 @@ public class Step3_RemoveCast : MonoBehaviour
         else if (player.p_State == PlayerCtrl.PlayerState.Danger || player.p_State == PlayerCtrl.PlayerState.Safety)
         {
             // 안전 장비 착용 후 제거 단계를 위해 UI 상태 초기화
-            instructionUI.transform.GetChild(2).gameObject.SetActive(true);
             instructionUI.transform.GetChild(0).gameObject.SetActive(true);
+            instructionUI.transform.GetChild(2).gameObject.SetActive(true);
+            instructionUI.transform.GetChild(3).gameObject.SetActive(true);
 
             instructionUI.SetActive(false);
         }

@@ -2,3 +2,4 @@ sub/*.spp filter=lfs diff=lfs merge=lfs -text
 3ds/*.max filter=lfs diff=lfs merge=lfs -text
 resourece/*.wav filter=lfs diff=lfs merge=lfs -text
 *wav filter=lfs diff=lfs merge=lfs -text
+com.oculus.shellenv-20220507-170517.mp4 filter=lfs diff=lfs merge=lfs -text

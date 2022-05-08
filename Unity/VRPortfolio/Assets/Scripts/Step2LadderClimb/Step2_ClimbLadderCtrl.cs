@@ -6,6 +6,7 @@ public class Step2_ClimbLadderCtrl : MonoBehaviour
 {
     public GameObject climbInstruction;
     public Transform popupPos;
+    public Transform startPos;
 
     public GameObject player;
 
@@ -18,11 +19,15 @@ public class Step2_ClimbLadderCtrl : MonoBehaviour
 
     void Start()
     {
-        Invoke("StartClimbLadder", 1.0f);
+        // Invoke("StartClimbLadder", 1.0f);
     }
 
     public void StartClimbLadder()
     {
+        player.GetComponent<CharacterController>().enabled = false;
+
+        player.transform.SetPositionAndRotation(startPos.position, startPos.rotation);
+
         climbInstruction.SetActive(true);
 
         climbInstruction.transform.SetPositionAndRotation(popupPos.position, popupPos.rotation);
