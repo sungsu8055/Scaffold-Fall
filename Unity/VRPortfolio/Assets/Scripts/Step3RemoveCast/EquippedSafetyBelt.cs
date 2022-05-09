@@ -34,23 +34,7 @@ public class EquippedSafetyBelt : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        /*/
-        if (other.CompareTag("ControllerRight"))
-        {
-            fixInstructionUI.SetActive(false);
-            audioManager.PlayAudioOnce(fixedSound);
-
-            safetyBeltController.SetActive(false);
-            originController.SetActive(true);
-            safetyBeltGuide.SetActive(false);
-            safetyBelt.SetActive(true);
-
-            RC.StartInstruction();
-        }
-        //*/
-
         StartCoroutine(SafetyBeltFixed(other));
-
     }
 
     IEnumerator SafetyBeltFixed(Collider collider)

@@ -78,6 +78,7 @@ public class ScaffoldFall : MonoBehaviour
         }
     }
 
+    // 추락 인명 사고 애니메이션
     void FallBehind()
     {
         player.transform.DOMove(spinningPos.position, 2.0f);
@@ -89,6 +90,7 @@ public class ScaffoldFall : MonoBehaviour
         blood.DOScale(1.0f, 0.5f).SetDelay(3.5f);
     }
 
+    // 추락 인명 사고 방지 애니메이션
     void FallSafely()
     {
         player.transform.DOMove(spinningPos.position, 2.0f);

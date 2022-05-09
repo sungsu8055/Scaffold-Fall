@@ -56,17 +56,6 @@ public class RemovePlateInteractable : XRGrabInteractable
                 StartCoroutine(RC.PullFormwork());
             }
         }
-
-        // 아래 트랙 옵션 원복 기능은 selectingInteractor 추가로 인해 사용하지 않게 됨
-        // 컨트롤러 당김 체크만으로 걸러냈을 때에는 모두가 영향을 받았으나 selectingInteractor가 없으면 기능 작동하지 않게 됨
-        /*/
-        if((!CPDR.pullObjectRight && !CPDL.pullObjectLeft) && restoreTrackOption)
-        {
-            Debug.Log("거푸집 고정");
-            this.trackPosition = false;
-            this.trackRotation = false;
-        }
-        //*/
     }
 
     // Interactable의 업데이트 진행
@@ -76,13 +65,19 @@ public class RemovePlateInteractable : XRGrabInteractable
         {
             /*/ 참고 자료 원본 스크립트(z 축으로 길게 잡을 때 적용)
             selectingInteractor.attachTransform.rotation 
-                = Quaternion.LookRotation(secondHandInteractor.attachTransform.position - selectingInteractor.attachTransform.position);
+                = Quaternion.LookRotation
+            (secondHandInteractor.attachTransform.position - selectingInteractor.attachTransform.position);
             //*/
 
             // 수정본(x 축으로 길게 잡을 때 사용)
-            selectingInteractor.attachTransform.LookAt(secondHandInteractor.attachTransform.position, selectingInteractor.attachTransform.right);
-            selectingInteractor.attachTransform.RotateAround(selectingInteractor.attachTransform.position, selectingInteractor.attachTransform.right, 90);
-            selectingInteractor.attachTransform.RotateAround(selectingInteractor.attachTransform.position, selectingInteractor.attachTransform.up, 90);       
+            selectingInteractor.attachTransform.LookAt
+                (secondHandInteractor.attachTransform.position, selectingInteractor.attachTransform.right);
+
+            selectingInteractor.attachTransform.RotateAround
+                (selectingInteractor.attachTransform.position, selectingInteractor.attachTransform.right, 90);
+
+            selectingInteractor.attachTransform.RotateAround
+                (selectingInteractor.attachTransform.position, selectingInteractor.attachTransform.up, 90);       
         }
         base.ProcessInteractable(updatePhase);
     }
